@@ -8,25 +8,84 @@ import {
   Menu, //菜单
   Modal, // 确认框
   Icon, //图标
+  Button, //按键
+  Tabs, //页签
+  Form, //表单
+  Input, //输入框
 } from 'antd'
+import {Link} from 'react-router'
 import logo from '../images/logo.png'
 
 // 菜单项组件
 const MenuItem = Menu.Item
+// 页签项
+const TabPane = Tabs.TabPane
+// 表单项
+const FormItem = Form.Item;
 
-export default class NewsHeader extends Component {
+
+class NewsHeader extends Component {
 
   state = {
-    selectedKey: 'top'
+    selectedKey: 'top',
+    username: null,
+    modalShow: true
+  }
+
+  showModal = (isShow) => {
+    this.setState({modalShow: isShow})
+  }
+
+  componentDidMount () {
+    // 读取保存到local中的username
+    const username = localStorage.getItem('username')
+    if(username) {
+      // 更新状态
+      this.setState({username})
+    }
   }
 
   clickMenu = ({key}) => {
+    // 如果点击的是'登陆/注册'
+    if(key==='logout') {
+      // 显示modal
+      this.setState({modalShow: true})
+    }
+
     // 更新状态
     this.setState({selectedKey: key})
   }
 
+  /*
+  处理提交登陆的请求
+   */
+  handleSubmit = (isLogin) => {
+    if(isLogin) {
+
+    } else {
+
+    }
+  }
+
   render () {
-    const {selectedKey} = this.state
+    const {selectedKey, username, modalShow} = this.state
+
+    const userShow = username
+      ?  (
+          <MenuItem key="login" className="register">
+            <Button type="primary">{username}</Button>&nbsp;&nbsp;
+            <Link to="/user_center"><Button type="dashed">个人中心</Button></Link>&nbsp;&nbsp;
+            <Button>退出</Button>
+          </MenuItem>
+        )
+      : (
+          <MenuItem key="logout" className="register">
+            <Icon type="appstore"/>登陆/注册
+          </MenuItem>
+        )
+
+    const { getFieldDecorator} = this.props.form
+
     return (
       <header>
         <Row>
@@ -63,8 +122,64 @@ export default class NewsHeader extends Component {
               <MenuItem key="shishang">
                 <Icon type="appstore"/>时尚
               </MenuItem>
+
+              {userShow}
             </Menu>
-            <Modal></Modal>
+            <Modal title="用户中心"
+                   visible={modalShow}
+                   onOk={this.showModal.bind(this, false)}
+                   onCancel={() =>this.showModal(false)}
+                   okText="关闭">
+              <Tabs type="card">
+                <TabPane tab="登陆" key="1">
+                  <Form onSubmit={this.handleSubmit.bind(this, true)}>
+                    <FormItem label="用户名">
+                      {
+                        getFieldDecorator('username')(
+                          <Input type='text' placeholder="请输入用户名"/>
+                        )
+                      }
+                    </FormItem>
+                    <FormItem label="密码">
+                      {
+                        getFieldDecorator('pwd')(
+                          <Input type='password' placeholder="请输入密码"/>
+                        )
+                      }
+                    </FormItem>
+                    <Button type='primary' htmlType="submit">登陆</Button>
+                  </Form>
+                </TabPane>
+                <TabPane tab="注册" key="2">
+                  <Form onSubmit={this.handleSubmit.bind(this, false)}>
+                    <FormItem label="用户名">
+                      {
+                        getFieldDecorator('username')(
+                          <Input type='text' placeholder="请输入用户名"/>
+                        )
+                      }
+                    </FormItem>
+                    <FormItem label="密码">
+                      {
+                        getFieldDecorator('pwd')(
+                          <Input type='password' placeholder="请输入密码"/>
+                        )
+                      }
+
+                    </FormItem>
+                    <FormItem label="确认密码">
+                      {
+                        getFieldDecorator('pwd2')(
+                          <Input type='password' placeholder="请输入确认密码"/>
+                        )
+                      }
+
+                    </FormItem>
+                    <Button type='primary' htmlType="submit">注册</Button>
+                  </Form>
+                </TabPane>
+              </Tabs>
+            </Modal>
           </Col>
           <Col span={1}></Col>
         </Row>
@@ -72,3 +187,6 @@ export default class NewsHeader extends Component {
     )
   }
 }
+
+//对NewsHeader组件进行包装产生一个新的组件类, 向NewsHeader传入一个属性: form
+export default Form.create()(NewsHeader)

@@ -8,7 +8,6 @@ export default class NewsContainer extends Component {
       <div>
         <a href="#/news_detail/1">新闻1</a><br/>
         <a href="#/news_detail/2">新闻2</a><br/>
-        <a href="#/user_center">个人中心</a>
       </div>
     )
   }
