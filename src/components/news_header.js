@@ -2,6 +2,7 @@
  * 头部组件
  */
 import React, {Component} from 'react'
+import axios from 'axios'
 import {
   Row, // 行
   Col, // 列,
@@ -12,6 +13,7 @@ import {
   Tabs, //页签
   Form, //表单
   Input, //输入框
+  message, //消息
 } from 'antd'
 import {Link} from 'react-router'
 import logo from '../images/logo.png'
@@ -24,12 +26,14 @@ const TabPane = Tabs.TabPane
 const FormItem = Form.Item;
 
 
+
+
 class NewsHeader extends Component {
 
   state = {
     selectedKey: 'top',
     username: null,
-    modalShow: true
+    modalShow: false
   }
 
   showModal = (isShow) => {
@@ -60,11 +64,54 @@ class NewsHeader extends Component {
   处理提交登陆的请求
    */
   handleSubmit = (isLogin) => {
+    // 收集表单输入的数据
+    const {username, password, r_userName, r_password, r_confirmPassword} = this.props.form.getFieldsValue()
+
+    // 准备url
+    let url = 'http://newsapi.gugujiankong.com/Handler.ashx?'
     if(isLogin) {
-
+      url += `action=login&username=${username}&password=${password}`
     } else {
-
+      url += `action=register&r_userName=${r_userName}&r_password=${r_password}&r_confirmPassword=${r_confirmPassword}`
     }
+
+    // 发请求
+    axios.get(url)
+      .then(response => {
+        // 清除输入的数据
+        this.props.form.resetFields()
+
+        const result = response.data
+        if(isLogin) { // 登陆的返回
+          if(!result) { // 失败
+            message.error('登陆失败, 重新登陆')
+          } else { // 成功
+            message.success('登陆成功')
+            // 读取返回的username/userId
+            const username = result.NickUserName
+            const userId = result.UserId
+            // 更新状态
+            this.setState({username})
+            // 保存username/userId
+            localStorage.setItem('username', username)
+            localStorage.setItem('userId', userId)
+          }
+        } else { // 注册的返回
+          // 提示成功
+          message.success('注册成功')
+        }
+      })
+    //关闭modal
+    this.setState({modalShow: false})
+  }
+
+
+  logout = () => {
+    //更新状态
+    this.setState({username: null})
+    // 清除保存的用户数据
+    localStorage.removeItem('username')
+    localStorage.removeItem('userId')
   }
 
   render () {
@@ -75,7 +122,7 @@ class NewsHeader extends Component {
           <MenuItem key="login" className="register">
             <Button type="primary">{username}</Button>&nbsp;&nbsp;
             <Link to="/user_center"><Button type="dashed">个人中心</Button></Link>&nbsp;&nbsp;
-            <Button>退出</Button>
+            <Button onClick={this.logout}>退出</Button>
           </MenuItem>
         )
       : (
@@ -130,7 +177,7 @@ class NewsHeader extends Component {
                    onOk={this.showModal.bind(this, false)}
                    onCancel={() =>this.showModal(false)}
                    okText="关闭">
-              <Tabs type="card">
+              <Tabs type="card" onChange={() => this.props.form.resetFields()}>
                 <TabPane tab="登陆" key="1">
                   <Form onSubmit={this.handleSubmit.bind(this, true)}>
                     <FormItem label="用户名">
@@ -142,7 +189,7 @@ class NewsHeader extends Component {
                     </FormItem>
                     <FormItem label="密码">
                       {
-                        getFieldDecorator('pwd')(
+                        getFieldDecorator('password')(
                           <Input type='password' placeholder="请输入密码"/>
                         )
                       }
@@ -154,14 +201,14 @@ class NewsHeader extends Component {
                   <Form onSubmit={this.handleSubmit.bind(this, false)}>
                     <FormItem label="用户名">
                       {
-                        getFieldDecorator('username')(
+                        getFieldDecorator('r_userName')(
                           <Input type='text' placeholder="请输入用户名"/>
                         )
                       }
                     </FormItem>
                     <FormItem label="密码">
                       {
-                        getFieldDecorator('pwd')(
+                        getFieldDecorator('r_password')(
                           <Input type='password' placeholder="请输入密码"/>
                         )
                       }
@@ -169,7 +216,7 @@ class NewsHeader extends Component {
                     </FormItem>
                     <FormItem label="确认密码">
                       {
-                        getFieldDecorator('pwd2')(
+                        getFieldDecorator('r_confirmPassword')(
                           <Input type='password' placeholder="请输入确认密码"/>
                         )
                       }
