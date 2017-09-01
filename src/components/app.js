@@ -4,6 +4,7 @@
 import React, {Component} from 'react'
 import NewsHeader from './news_header'
 import NewsFooter from './news_footer'
+import '../componentsCss/pc.css'
 
 export default class App extends Component {
   render () {
