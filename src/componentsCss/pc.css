@@ -1,3 +1,4 @@
+/*news_header组件*/
 /*应用图标和名称*/
 .logo {
   align-items: center;
@@ -11,12 +12,11 @@
   font-size: 24px;
   padding-left: 5px;
 }
-
 /*注册/登陆 menuItem*/
 .register {
   float: right !important;
 }
-
+/*解决链接block的问题*/
 .ant-menu-horizontal > .ant-menu-item > a, .ant-menu-horizontal > .ant-menu-submenu > a {
   display: inline-block;
 }
