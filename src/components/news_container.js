@@ -4,6 +4,8 @@
 import React, {Component} from 'react'
 import {Row, Col, Carousel, Tabs} from 'antd'
 
+import NewsBlock from './news_block'
+
 import carousel_1 from '../images/carousel_1.jpg'
 import carousel_2 from '../images/carousel_2.jpg'
 import carousel_3 from '../images/carousel_3.jpg'
@@ -27,8 +29,12 @@ export default class NewsContainer extends Component {
               </Carousel>
             </div>
             <Tabs className='tabs_news' style={{width:'35%'}}>
-              <TabPane key="1" tab="头条新闻">头条新闻</TabPane>
-              <TabPane key="2" tab="国际新闻">国际新闻</TabPane>
+              <TabPane key="1" tab="头条新闻">
+                <NewsBlock type="top" count={21}></NewsBlock>
+              </TabPane>
+              <TabPane key="2" tab="国际新闻">
+                <NewsBlock type="guoji" count={21}></NewsBlock>
+              </TabPane>
             </Tabs>
           </Col>
           <Col span={1}></Col>

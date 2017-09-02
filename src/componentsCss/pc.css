@@ -58,3 +58,29 @@
   float: left;
   text-overflow: ellipsis;
 }
+
+/*news_block*/
+.topNewsList {
+  float: left;
+  text-align: left;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+.topNewsList a {
+  line-height: 22px !important;
+  color: #666 !important;
+}
+
+.ant-card{
+  margin-top: 5px !important;
+}
+.ant-card-head-title{
+  text-align: left !important;
+}
+.ant-card-body{
+  text-align: left !important;
+  padding: 15px !important;
+}
+.ant-tabs-bar {
+  margin-bottom: 0 !important;
+}
