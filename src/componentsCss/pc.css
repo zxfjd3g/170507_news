@@ -20,3 +20,41 @@
 .ant-menu-horizontal > .ant-menu-item > a, .ant-menu-horizontal > .ant-menu-submenu > a {
   display: inline-block;
 }
+
+/*news_container组件*/
+.container {
+/*  text-align: center;*/
+  padding-top: 10px;
+  margin-top: 5px;
+}
+.leftContainer {
+  width: 400px;
+  float: left;
+}
+
+/*轮播图*/
+.ant-carousel {
+  width: 400px;
+  float: left;
+}
+.ant-carousel img {
+  width: 400px;
+  height: 260px;
+}
+
+/*新闻列表*/
+.tabs_news {
+  padding-left: 10px;
+  width: 400px;
+  float: left;
+}
+.tabs_news li {
+  height: 27px;
+  line-height: 27px;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 417px;
+  float: left;
+  text-overflow: ellipsis;
+}

@@ -2,12 +2,37 @@
  * 默认路由组件(各种新闻列表)
  */
 import React, {Component} from 'react'
+import {Row, Col, Carousel, Tabs} from 'antd'
+
+import carousel_1 from '../images/carousel_1.jpg'
+import carousel_2 from '../images/carousel_2.jpg'
+import carousel_3 from '../images/carousel_3.jpg'
+import carousel_4 from '../images/carousel_4.jpg'
+
+const TabPane = Tabs.TabPane
+
 export default class NewsContainer extends Component {
   render () {
     return (
       <div>
-        <a href="#/news_detail/1">新闻1</a><br/>
-        <a href="#/news_detail/2">新闻2</a><br/>
+        <Row className='container'>
+          <Col span={1}></Col>
+          <Col span={22}>
+            <div className="leftContainer" style={{width:'35%'}}>
+              <Carousel autoplay>
+                <div><img src={carousel_1}/></div>
+                <div><img src={carousel_2}/></div>
+                <div><img src={carousel_3}/></div>
+                <div><img src={carousel_4}/></div>
+              </Carousel>
+            </div>
+            <Tabs className='tabs_news' style={{width:'35%'}}>
+              <TabPane key="1" tab="头条新闻">头条新闻</TabPane>
+              <TabPane key="2" tab="国际新闻">国际新闻</TabPane>
+            </Tabs>
+          </Col>
+          <Col span={1}></Col>
+        </Row>
       </div>
     )
   }
