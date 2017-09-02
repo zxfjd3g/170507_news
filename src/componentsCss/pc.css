@@ -84,3 +84,31 @@
 .ant-tabs-bar {
   margin-bottom: 0 !important;
 }
+
+/*news_image_block*/
+.imageblock {
+  float: left;
+}
+.custom-card {
+  padding: 5px;
+}
+.custom-card p {
+  color: #999;
+}
+
+/*news_products*/
+.pro_bg {
+  background: #eeeeee;
+  margin-top: 10px;
+}
+
+.pro {
+  padding: 5px;
+  overflow: hidden;
+}
+
+.pro a {
+  float: left;
+  line-height: 30px;
+  margin-right: 5px;
+}
