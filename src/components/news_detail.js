@@ -5,6 +5,7 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import {Row, Col, BackTop} from 'antd'
 import NewsImageBlock from './news_image_block'
+import NewsComments from './news_comments'
 
 export default class NewsDetail extends Component {
 
@@ -37,13 +38,14 @@ export default class NewsDetail extends Component {
 
   render () {
     const {news} = this.state
-    const {type} = this.props.params
+    const {type, uniquekey} = this.props.params
     return (
       <div>
         <Row>
           <Col span={1}></Col>
           <Col span={16} className='container'>
             <div dangerouslySetInnerHTML={{__html:news.pagecontent}}></div>
+            <NewsComments uniquekey={uniquekey}></NewsComments>
           </Col>
           <Col span={6}>
             <NewsImageBlock type={type} count={40} cardWidth='100%' imageWidth='150px' cardTitle="相关新闻"></NewsImageBlock>
