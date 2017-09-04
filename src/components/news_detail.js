@@ -38,7 +38,11 @@ export default class NewsDetail extends Component {
 
   render () {
     const {news} = this.state
-    const {type, uniquekey} = this.props.params
+    let {type, uniquekey} = this.props.params
+    // 如果没有指定, 默认指定为top
+    if(!type) {
+      type = 'top'
+    }
     return (
       <div>
         <Row>

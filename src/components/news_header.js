@@ -63,7 +63,10 @@ class NewsHeader extends Component {
   /*
   处理提交登陆的请求
    */
-  handleSubmit = (isLogin) => {
+  handleSubmit = (isLogin, event) => {
+    // 阻止表单提交的默认行为
+    event.preventDefault()
+
     // 收集表单输入的数据
     const {username, password, r_userName, r_password, r_confirmPassword} = this.props.form.getFieldsValue()
 
