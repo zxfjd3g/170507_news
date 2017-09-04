@@ -35,10 +35,22 @@
     在请求返回后, 根据响应数据的情况来做不同界面更新
     
 # 2. day02
-## 1). news_container组件
-
-## 2). news_block组件
-
-## 3). news_image_block组件
-
-## 4). news_products组件
+## 1). 自定义组件
+    news_container组件: app组件的默认子路由
+    news_block组件: 文本新闻列表, type/count
+    news_image_block组件: 图片新闻列表, type/count/cardTitle/cardWidth/imageWidth
+    news_products组件: 将静态页面转换为组件
+## 2) antd组件
+    Row/Col
+    Card
+    Tabs/TabPane
+    Carousel
+## 3) 双端自适应
+    使用一个媒体查询的react插件(识别设备的宽度, 返回不同的界面): react-responsive
+    
+    
+# 3. day03
+    news_detail
+      news_comments
+    user_center
+    

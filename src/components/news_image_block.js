@@ -35,7 +35,7 @@ export default class NewsImageBlock extends Component {
   }
 
   render () {
-    const {cardTitle, cardWidth, imageWidth} = this.props
+    const {cardTitle, cardWidth, imageWidth, type} = this.props
     const {newsArr} = this.state
     // 图片样式对象
     const imageStyle = {
@@ -57,7 +57,7 @@ export default class NewsImageBlock extends Component {
       : (
           newsArr.map((news, index) => (
             <div key={index} className="imageblock">
-              <Link to={`/news_detail/${news.uniquekey}`}>
+              <Link to={`/news_detail/${news.uniquekey}/${type}`}>
                 <div>
                   <img src={news.thumbnail_pic_s} style={imageStyle}/>
                 </div>

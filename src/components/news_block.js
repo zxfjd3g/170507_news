@@ -31,6 +31,7 @@ export default class NewsBlock extends Component {
 
   render () {
     const {newsArr} = this.state
+    const {type} = this.props
     const contentUI = !newsArr
       ? <h2>没有任意新闻</h2>
       : (
@@ -38,7 +39,7 @@ export default class NewsBlock extends Component {
             {
               newsArr.map((news, index) => (
                 <li key={index}>
-                  <Link to={`/news_detail/${news.uniquekey}`}>{news.title}</Link>
+                  <Link to={`/news_detail/${news.uniquekey}/${type}`}>{news.title}</Link>
                 </li>
               ))
             }

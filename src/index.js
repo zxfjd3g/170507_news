@@ -14,7 +14,7 @@ render((
       <Router history={hashHistory}>
         <Route path='/' component={App}>
           <IndexRoute component={NewsContainer}></IndexRoute>
-          <Route path='/news_detail/:id' component={NewsDetail}></Route>
+          <Route path='/news_detail/:uniquekey/:type' component={NewsDetail}></Route>
           <Route path='/user_center' component={UserCenter}></Route>
         </Route>
       </Router>
