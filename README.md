@@ -50,11 +50,20 @@
     
     
 # 3. day03
-    news_detail
-      news_comments
-    user_center
-
-## 理解rest api  / restful api
+## 1). 自定义组件
+    news_detail组件: 显示新闻详情相关新闻列表
+    news_comments组件: 新闻的评论列表/提交评论和收藏文章的功能
+    user_center组件: 显示用户的收藏文章列表与评论列表和设置头像
+## 2) antd组件
+    Row/Col
+    Form/FormItem/Input/Button
+    BackTop
+    Card
+    Tabs/TabPane
+    Modal
+    Upload
+## 3) rest api
+### 理解rest api  / restful api
   * api接口的分类
     * restful: rest风格
     * restless: 非rest风格
@@ -79,10 +88,29 @@
   * 使用:
     * 下载 json-server
     * 创建一个数据库文件: src/mock/db.json
+      {
+        "users": [
+          {"id": 1, "name": "Tom", age: 12},
+          {"id": 2, "name": "Tom2", age: 13}
+        ]
+        "comment": {
+          "id": 1, "username": "Tom", content: 'xxxx'
+        }
+      }
     * 启动服务器: json-server --watch src/mock/db.json
+       http://localhost:3000/users
+       http://localhost:3000/users/2
+       http://localhost:3000/comment
   * postman/编码测试访问rest接口
     * axios
     * axios.get(): get请求, 查询
     * axios.post(): post请求, 保存
     * axios.put(): put请求, 更新
     * axios.delete(): delete请求, 删除
+    
+# 4. day04
+  实现移动端的编码
+  MobileApp
+  MobileHeader
+  MobileContainer(MobileNewsBlock)/MobileNewsDetail/MobileUserCenter
+    

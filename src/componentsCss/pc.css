@@ -33,11 +33,11 @@
 }
 
 /*轮播图*/
-.ant-carousel {
+.leftContainer>.ant-carousel {
   width: 400px;
   float: left;
 }
-.ant-carousel img {
+.leftContainer>.ant-carousel img {
   width: 400px;
   height: 260px;
 }

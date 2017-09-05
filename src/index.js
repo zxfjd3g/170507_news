@@ -6,6 +6,11 @@ import App from './components/app'
 import NewsContainer from './components/news_container'
 import NewsDetail from './components/news_detail'
 import UserCenter from './components/user_center'
+import MobileApp from './components/MobileApp'
+import MobileNewsContainer from './components/MobileNewsContainer'
+import MobileNewsDetail from './components/MobileNewsDetail'
+import MobileUserCenter from './components/MobileUserCenter'
+
 
 
 render((
@@ -20,7 +25,13 @@ render((
       </Router>
     </MediaQuery>
     <MediaQuery query='(max-device-width: 1224px)'>
-      <div>手机界面</div>
+      <Router history={hashHistory}>
+        <Route path='/' component={MobileApp}>
+          <IndexRoute component={MobileNewsContainer}></IndexRoute>
+          <Route path='/news_detail/:uniquekey' component={MobileNewsDetail}></Route>
+          <Route path='/user_center' component={MobileUserCenter}></Route>
+        </Route>
+      </Router>
     </MediaQuery>
   </div>
 ), document.getElementById('root'))
